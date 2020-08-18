@@ -1,15 +1,5 @@
-FROM golang:1.12
+FROM gcr.io/jenkinsxio-labs-private/jxl-base:0.0.55
 
-WORKDIR /go/src/github.com/jstrachan/trigger-pipeline
+ENTRYPOINT ["jx-jenkins"]
 
-COPY . /go/src/github.com/jstrachan/trigger-pipeline
-
-RUN make linux
-
-FROM centos:7
-
-RUN yum install -y git
-
-ENTRYPOINT ["tp", "trigger"]
-
-COPY --from=0 /go/src/github.com/jstrachan/trigger-pipeline/build/linux/tp /usr/local/bin
+COPY ./build/linux/jx-jenkins /usr/bin/jx-jenkins
