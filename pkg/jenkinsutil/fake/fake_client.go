@@ -12,10 +12,10 @@ import (
 )
 
 // NotFoundMessage error message if something is not found
-const NotFoundMessage = "Not Found"
+const NotFoundMessage = "not found"
 
 // FakeClient a fake Jenkins client for easier testing
-type FakeClient struct {
+type Client struct {
 	Jobs          []gojenkins.Job
 	BaseURLValue  string
 	Operations    []string
@@ -50,13 +50,13 @@ func (j *FolderXMLJob) FullJobPath() string {
 	return "/job/" + j.Folder + "/job/" + j.JobName
 }
 
-var _ gojenkins.JenkinsClient = (*FakeClient)(nil)
+var _ gojenkins.JenkinsClient = (*Client)(nil)
 
-func (f *FakeClient) GetJobs() ([]gojenkins.Job, error) {
+func (f *Client) GetJobs() ([]gojenkins.Job, error) {
 	return f.Jobs, nil
 }
 
-func (f *FakeClient) GetJob(name string) (gojenkins.Job, error) {
+func (f *Client) GetJob(name string) (gojenkins.Job, error) {
 	for _, j := range f.Jobs {
 		if j.Name == name {
 			return j, nil
@@ -69,47 +69,47 @@ func notFoundError() error {
 	return fmt.Errorf(NotFoundMessage)
 }
 
-func (f *FakeClient) GetJobURLPath(path string) string {
+func (f *Client) GetJobURLPath(path string) string {
 	panic("implement me")
 }
 
-func (f *FakeClient) IsErrNotFound(err error) bool {
+func (f *Client) IsErrNotFound(err error) bool {
 	return err.Error() == NotFoundMessage
 }
 
-func (f *FakeClient) BaseURL() string {
+func (f *Client) BaseURL() string {
 	return f.BaseURLValue
 }
 
-func (f *FakeClient) SetHTTPClient(httpClient *http.Client) {
+func (f *Client) SetHTTPClient(httpClient *http.Client) {
 	f.httpClient = httpClient
 }
 
-func (f *FakeClient) Post(string, url.Values, interface{}) (err error) {
+func (f *Client) Post(string, url.Values, interface{}) (err error) {
 	panic("implement me")
 }
 
-func (f *FakeClient) GetJobConfig(string) (gojenkins.JobItem, error) {
+func (f *Client) GetJobConfig(string) (gojenkins.JobItem, error) {
 	panic("implement me")
 }
 
-func (f *FakeClient) GetBuild(gojenkins.Job, int) (gojenkins.Build, error) {
+func (f *Client) GetBuild(gojenkins.Job, int) (gojenkins.Build, error) {
 	panic("implement me")
 }
 
-func (f *FakeClient) GetLastBuild(gojenkins.Job) (gojenkins.Build, error) {
+func (f *Client) GetLastBuild(gojenkins.Job) (gojenkins.Build, error) {
 	panic("implement me")
 }
 
-func (f *FakeClient) StopBuild(gojenkins.Job, int) error {
+func (f *Client) StopBuild(gojenkins.Job, int) error {
 	panic("implement me")
 }
 
-func (f *FakeClient) GetMultiBranchJob(string, string, string) (gojenkins.Job, error) {
+func (f *Client) GetMultiBranchJob(string, string, string) (gojenkins.Job, error) {
 	panic("implement me")
 }
 
-func (f *FakeClient) GetJobByPath(paths ...string) (gojenkins.Job, error) {
+func (f *Client) GetJobByPath(paths ...string) (gojenkins.Job, error) {
 	var job gojenkins.Job
 
 	fullPath := gojenkins.FullJobPath(paths...)
@@ -151,122 +151,122 @@ func (f *FakeClient) GetJobByPath(paths ...string) (gojenkins.Job, error) {
 	return gojenkins.Job{}, notFoundError()
 }
 
-func (f *FakeClient) GetOrganizationScanResult(int, gojenkins.Job) (string, error) {
+func (f *Client) GetOrganizationScanResult(int, gojenkins.Job) (string, error) {
 	panic("implement me")
 }
 
-func (f *FakeClient) CreateJob(gojenkins.JobItem, string) error {
+func (f *Client) CreateJob(gojenkins.JobItem, string) error {
 	panic("implement me")
 }
 
-func (f *FakeClient) Reload() error {
+func (f *Client) Reload() error {
 	return f.doOperation("Reload")
 }
 
-func (f *FakeClient) Restart() error {
+func (f *Client) Restart() error {
 	return f.doOperation("Restart")
 }
 
-func (f *FakeClient) SafeRestart() error {
+func (f *Client) SafeRestart() error {
 	return f.doOperation("SafeRestart")
 }
 
-func (f *FakeClient) QuietDown() error {
+func (f *Client) QuietDown() error {
 	return f.doOperation("QuietDown")
 }
 
-func (f *FakeClient) CreateJobWithXML(jobItemXml string, jobName string) error {
+func (f *Client) CreateJobWithXML(jobItemXml string, jobName string) error {
 	f.XMLJobs = append(f.XMLJobs, XMLJob{jobItemXml, jobName})
 	return nil
 }
 
-func (f *FakeClient) CreateFolderJobWithXML(jobItemXml string, folder string, jobName string) error {
+func (f *Client) CreateFolderJobWithXML(jobItemXml string, folder string, jobName string) error {
 	f.FolderXMLJobs = append(f.FolderXMLJobs, FolderXMLJob{jobItemXml, folder, jobName})
 	return nil
 }
 
-func (f *FakeClient) GetCredential(string) (*gojenkins.Credentials, error) {
+func (f *Client) GetCredential(string) (*gojenkins.Credentials, error) {
 	panic("implement me")
 }
 
-func (f *FakeClient) CreateCredential(string, string, string) error {
+func (f *Client) CreateCredential(string, string, string) error {
 	panic("implement me")
 }
 
-func (f *FakeClient) DeleteJob(gojenkins.Job) error {
+func (f *Client) DeleteJob(gojenkins.Job) error {
 	panic("implement me")
 }
 
-func (f *FakeClient) UpdateJob(gojenkins.JobItem, string) error {
+func (f *Client) UpdateJob(gojenkins.JobItem, string) error {
 	panic("implement me")
 }
 
-func (f *FakeClient) RemoveJob(string) error {
+func (f *Client) RemoveJob(string) error {
 	panic("implement me")
 }
 
-func (f *FakeClient) AddJobToView(string, gojenkins.Job) error {
+func (f *Client) AddJobToView(string, gojenkins.Job) error {
 	panic("implement me")
 }
 
-func (f *FakeClient) CreateView(gojenkins.ListView) error {
+func (f *Client) CreateView(gojenkins.ListView) error {
 	panic("implement me")
 }
 
-func (f *FakeClient) Build(job gojenkins.Job, values url.Values) error {
+func (f *Client) Build(job gojenkins.Job, values url.Values) error {
 	f.BuildRequests = append(f.BuildRequests, BuildRequest{job, values})
 	return nil
 }
 
-func (f *FakeClient) GetBuildConsoleOutput(gojenkins.Build) ([]byte, error) {
+func (f *Client) GetBuildConsoleOutput(gojenkins.Build) ([]byte, error) {
 	panic("implement me")
 }
 
-func (f *FakeClient) GetQueue() (gojenkins.Queue, error) {
+func (f *Client) GetQueue() (gojenkins.Queue, error) {
 	panic("implement me")
 }
 
-func (f *FakeClient) GetArtifact(gojenkins.Build, gojenkins.Artifact) ([]byte, error) {
+func (f *Client) GetArtifact(gojenkins.Build, gojenkins.Artifact) ([]byte, error) {
 	panic("implement me")
 }
 
-func (f *FakeClient) SetBuildDescription(gojenkins.Build, string) error {
+func (f *Client) SetBuildDescription(gojenkins.Build, string) error {
 	panic("implement me")
 }
 
-func (f *FakeClient) GetComputerObject() (gojenkins.ComputerObject, error) {
+func (f *Client) GetComputerObject() (gojenkins.ComputerObject, error) {
 	panic("implement me")
 }
 
-func (f *FakeClient) GetComputers() ([]gojenkins.Computer, error) {
+func (f *Client) GetComputers() ([]gojenkins.Computer, error) {
 	panic("implement me")
 }
 
-func (f *FakeClient) GetComputer(string) (gojenkins.Computer, error) {
+func (f *Client) GetComputer(string) (gojenkins.Computer, error) {
 	panic("implement me")
 }
 
-func (f *FakeClient) GetBuildURL(gojenkins.Job, int) string {
+func (f *Client) GetBuildURL(gojenkins.Job, int) string {
 	panic("implement me")
 }
 
-func (f *FakeClient) GetLogFromURL(string, int64, *gojenkins.LogData) error {
+func (f *Client) GetLogFromURL(string, int64, *gojenkins.LogData) error {
 	panic("implement me")
 }
 
-func (f *FakeClient) TailLog(string, io.Writer, time.Duration, time.Duration) error {
+func (f *Client) TailLog(string, io.Writer, time.Duration, time.Duration) error {
 	panic("implement me")
 }
 
-func (f *FakeClient) TailLogFunc(string, io.Writer) gojenkins.ConditionFunc {
+func (f *Client) TailLogFunc(string, io.Writer) gojenkins.ConditionFunc {
 	panic("implement me")
 }
 
-func (f *FakeClient) NewLogPoller(string, io.Writer) *gojenkins.LogPoller {
+func (f *Client) NewLogPoller(string, io.Writer) *gojenkins.LogPoller {
 	panic("implement me")
 }
 
-func (f *FakeClient) doOperation(name string) error {
+func (f *Client) doOperation(name string) error {
 	f.Operations = append(f.Operations, name)
 	return nil
 }

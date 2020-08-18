@@ -16,7 +16,7 @@ import (
 )
 
 // JobsOptions contains the command line arguments for this command
-type JobsOptions struct {
+type Options struct {
 	jenkinsutil.JenkinsOptions
 
 	JenkinsSelector jenkinsutil.JenkinsSelectorOptions
@@ -37,8 +37,8 @@ var (
 )
 
 // NewCmdJobs creates the new command
-func NewCmdJobs() (*cobra.Command, *JobsOptions) {
-	o := &JobsOptions{}
+func NewCmdJobs() (*cobra.Command, *Options) {
+	o := &Options{}
 	cmd := &cobra.Command{
 		Use:     "jobs",
 		Short:   "lists the Jobs in a given Jenkins server",
@@ -59,7 +59,7 @@ func NewCmdJobs() (*cobra.Command, *JobsOptions) {
 }
 
 // Run implements the command
-func (o *JobsOptions) Run() error {
+func (o *Options) Run() error {
 	var err error
 	o.ClientFactory, err = factory.NewClientFactory()
 	if err != nil {
@@ -73,7 +73,7 @@ func (o *JobsOptions) Run() error {
 		return err
 	}
 
-	names := []string{}
+	var names []string
 	for k := range jobs {
 		names = append(names, k)
 	}

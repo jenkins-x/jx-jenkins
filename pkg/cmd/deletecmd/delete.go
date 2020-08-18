@@ -99,7 +99,7 @@ func (o *DeleteOptions) Run() error {
 	}
 
 	if jsvc.SecretName == "" {
-		return fmt.Errorf("Jenkins service does not have a Secret name for: %s", name)
+		return fmt.Errorf("jenkins service does not have a Secret name for: %s", name)
 	}
 
 	return o.deleteSecret(jsvc.SecretName)

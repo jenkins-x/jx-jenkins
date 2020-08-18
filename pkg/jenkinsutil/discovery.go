@@ -35,7 +35,7 @@ func FindJenkinsServers(f *ClientFactory, jenkinsSelector *JenkinsSelectorOption
 		m[k] = v
 	}
 
-	names := []string{}
+	var names []string
 	for k := range m {
 		names = append(names, k)
 	}

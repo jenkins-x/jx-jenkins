@@ -14,7 +14,7 @@ import (
 func TestTrigger(t *testing.T) {
 	_, o := trigger.NewCmdTrigger()
 
-	jenkinsClient := &fake.FakeClient{}
+	jenkinsClient := &fake.Client{}
 	branch := "master"
 	o.Dir = filepath.Join("test_data/sample")
 	gitInfo := &gits.GitRepository{

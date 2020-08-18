@@ -109,7 +109,7 @@ func (o *JenkinsOptions) PickCustomJenkinsName(jenkinsSelector *JenkinsSelectorO
 	switch len(names) {
 	case 0:
 		if failIfNone {
-			return "", nil, fmt.Errorf("No Jenkins services found. Try: tp server add")
+			return "", nil, fmt.Errorf("no Jenkins services found. Try: tp server add")
 		}
 		return "", nil, nil
 
@@ -245,7 +245,7 @@ func (o *JenkinsOptions) FindGitInfo(dir string) (*gits.GitRepository, error) {
 		return nil, fmt.Errorf("Could not find a .git directory: %s\n", err)
 	} else {
 		if gitConf == "" {
-			return nil, fmt.Errorf("No git conf dir found")
+			return nil, fmt.Errorf("no git conf dir found")
 		}
 		gitURL, err := o.Git().DiscoverUpstreamGitURL(gitConf)
 		if err != nil {

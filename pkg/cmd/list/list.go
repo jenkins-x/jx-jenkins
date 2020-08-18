@@ -17,16 +17,16 @@ import (
 )
 
 // ListOptions contains the command line arguments for this command
-type ListOptions struct {
+type Options struct {
 	jenkinsutil.JenkinsOptions
 
 	JenkinsSelector jenkinsutil.JenkinsSelectorOptions
 
-	Results ListResults
+	Results Results
 }
 
 // ListResults the results of the operation
-type ListResults struct {
+type Results struct {
 	Names   []string
 	Servers map[string]*jenkinsutil.JenkinsServer
 }
@@ -44,8 +44,8 @@ var (
 )
 
 // NewCmdList creates the new command
-func NewCmdList() (*cobra.Command, *ListOptions) {
-	o := &ListOptions{}
+func NewCmdList() (*cobra.Command, *Options) {
+	o := &Options{}
 	cmd := &cobra.Command{
 		Use:     "list",
 		Short:   "lists the Jenkins servers for the current namespace",
@@ -65,7 +65,7 @@ func NewCmdList() (*cobra.Command, *ListOptions) {
 }
 
 // Run implements the command
-func (o *ListOptions) Run() error {
+func (o *Options) Run() error {
 	var err error
 	if o.ClientFactory == nil {
 		o.ClientFactory, err = factory.NewClientFactory()

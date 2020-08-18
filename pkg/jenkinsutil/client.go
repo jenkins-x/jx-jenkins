@@ -45,7 +45,7 @@ func (f *ClientFactory) CreateJenkinsClient(jenkinsName string) (gojenkins.Jenki
 func (f *ClientFactory) JenkinsURL(jenkinsServiceName string) (string, error) {
 	client := f.KubeClient
 	ns := f.Namespace
-	url, err := services.FindServiceURL(client, ns, jenkinsServiceName)
+	u, err := services.FindServiceURL(client, ns, jenkinsServiceName)
 	if err != nil {
 		// lets try the real environment
 		realNS, _, err := kube.GetDevNamespace(client, ns)
@@ -53,17 +53,17 @@ func (f *ClientFactory) JenkinsURL(jenkinsServiceName string) (string, error) {
 			return "", errors.Wrapf(err, "failed to get the dev namespace from '%s' namespace", ns)
 		}
 		if realNS != ns {
-			url, err = services.FindServiceURL(client, realNS, jenkinsServiceName)
+			u, err = services.FindServiceURL(client, realNS, jenkinsServiceName)
 			if err != nil {
 				return "", errors.Wrapf(err, "failed to find service URL for %s in namespaces %s and %s", jenkinsServiceName, realNS, ns)
 			}
-			return url, nil
+			return u, nil
 		}
 	}
 	if err != nil {
 		return "", fmt.Errorf("%s in namespace %s", err, ns)
 	}
-	return url, err
+	return u, err
 }
 
 // PopulateAuth populates the gojenkins Auth

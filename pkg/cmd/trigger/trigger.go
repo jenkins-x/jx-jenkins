@@ -27,7 +27,7 @@ import (
 )
 
 // TriggerOptions contains the command line arguments for this command
-type TriggerOptions struct {
+type Options struct {
 	jenkinsutil.JenkinsOptions
 
 	MultiBranchProject bool
@@ -50,8 +50,8 @@ var (
 )
 
 // NewCmdTrigger creates the new command
-func NewCmdTrigger() (*cobra.Command, *TriggerOptions) {
-	o := &TriggerOptions{}
+func NewCmdTrigger() (*cobra.Command, *Options) {
+	o := &Options{}
 	cmd := &cobra.Command{
 		Use:     "trigger",
 		Short:   "triggers the Jenkinsfile in the current directory in a Jenkins server installed via the Jenkins Operator",
@@ -80,7 +80,7 @@ func NewCmdTrigger() (*cobra.Command, *TriggerOptions) {
 }
 
 // Run implements the command
-func (o *TriggerOptions) Run() error {
+func (o *Options) Run() error {
 	var err error
 	o.ClientFactory, err = factory.NewClientFactory()
 	if err != nil {
@@ -120,7 +120,7 @@ func (o *TriggerOptions) Run() error {
 }
 
 // TriggerPipeline triggers the pipeline after the main service clients are created
-func (o *TriggerOptions) TriggerPipeline(jenkinsClient gojenkins.JenkinsClient, gitInfo *gits.GitRepository, branch string) error {
+func (o *Options) TriggerPipeline(jenkinsClient gojenkins.JenkinsClient, gitInfo *gits.GitRepository, branch string) error {
 	jenkinsfileName := filepath.Join(o.Dir, o.Jenkinsfile)
 	exists, err := util.FileExists(jenkinsfileName)
 	if err != nil {

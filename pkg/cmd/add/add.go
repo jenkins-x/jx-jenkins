@@ -20,7 +20,7 @@ import (
 )
 
 // AddOptions contains the command line arguments for this command
-type AddOptions struct {
+type Options struct {
 	jenkinsutil.JenkinsOptions
 
 	JenkinsService jenkinsutil.JenkinsServer
@@ -39,8 +39,8 @@ var (
 )
 
 // NewCmdAdd creates the new command
-func NewCmdAdd() (*cobra.Command, *AddOptions) {
-	o := &AddOptions{}
+func NewCmdAdd() (*cobra.Command, *Options) {
+	o := &Options{}
 	cmd := &cobra.Command{
 		Use:     "add",
 		Short:   "adds a new Jenkins server to the registry of Jenkins servers",
@@ -64,7 +64,7 @@ func NewCmdAdd() (*cobra.Command, *AddOptions) {
 }
 
 // Run implements the command
-func (o *AddOptions) Run() error {
+func (o *Options) Run() error {
 	var err error
 	if o.ClientFactory == nil {
 		o.ClientFactory, err = factory.NewClientFactory()
@@ -83,7 +83,7 @@ func (o *AddOptions) Run() error {
 	return o.createJenkinsService(j)
 }
 
-func (o *AddOptions) populateJenkinsService(j *jenkinsutil.JenkinsServer) error {
+func (o *Options) populateJenkinsService(j *jenkinsutil.JenkinsServer) error {
 	if o.BatchMode {
 		if j.Name == "" {
 			return util.MissingOption("name")
@@ -139,7 +139,7 @@ func (o *AddOptions) populateJenkinsService(j *jenkinsutil.JenkinsServer) error 
 	return nil
 }
 
-func (o *AddOptions) createJenkinsService(j *jenkinsutil.JenkinsServer) error {
+func (o *Options) createJenkinsService(j *jenkinsutil.JenkinsServer) error {
 	j.Name = naming.ToValidName(j.Name)
 	secretsName := "tp-" + j.Name
 
