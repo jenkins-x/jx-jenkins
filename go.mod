@@ -1,17 +1,24 @@
 module github.com/jenkins-x/jx-jenkins
 
 require (
+	github.com/MakeNowJust/heredoc v1.0.0 // indirect
+	github.com/alecthomas/jsonschema v0.0.0-20200530073317-71f438968921 // indirect
+	github.com/cpuguy83/go-md2man v1.0.10
 	github.com/jenkins-x/golang-jenkins v0.0.0-20180919102630-65b83ad42314
-	github.com/jenkins-x/jx-logging v0.0.10
-	github.com/jenkins-x/jx/v2 v2.1.90
-	github.com/magiconair/properties v1.8.0
+	github.com/jenkins-x/jx-api v0.0.17 // indirect
+	github.com/jenkins-x/jx-logging v0.0.11
+	github.com/jenkins-x/jx/v2 v2.1.128
+	github.com/jenkins-x/lighthouse v0.0.708 // indirect
+	github.com/magiconair/properties v1.8.1
+	github.com/mattn/go-colorable v0.1.6 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/cobra v1.0.0
+	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.6.1
-	k8s.io/api v0.17.2
-	k8s.io/apimachinery v0.17.2
+	gopkg.in/AlecAivazis/survey.v1 v1.8.8 // indirect
+	k8s.io/api v0.18.1
+	k8s.io/apimachinery v0.18.1
 	k8s.io/client-go v11.0.1-0.20190805182717-6502b5e7b1b5+incompatible
-
 )
 
 replace github.com/heptio/sonobuoy => github.com/jenkins-x/sonobuoy v0.11.7-0.20190318120422-253758214767
