@@ -125,10 +125,7 @@ darwin: ## Build for OSX
 	chmod +x build/darwin/$(NAME)
 
 .PHONY: release
-release: clean build test linux win darwin
-	#git fetch origin refs/tags/v$(VERSION)
-	jx step changelog --verbose --header-file=hack/changelog-header.md --version=$(VERSION) --rev=$(PULL_BASE_SHA) --output-markdown=changelog.md --update-release=false
-	jxl goreleaser --organisation=$(ORG) --revision=$(REV) --branch=$(BRANCH) --build-date=$(BUILD_DATE) --go-version=$(GO_VERSION) --root-package=$(ROOT_PACKAGE) --version=$(VERSION)
+release: clean build test linux
 
 .PHONY: clean
 clean: ## Clean the generated artifacts
@@ -160,3 +157,14 @@ lint: ## Lint the code
 
 .PHONY: all
 all: fmt build lint test
+
+bin/docs:
+	go build $(LDFLAGS) -v -o bin/docs cmd/docs/*.go
+
+.PHONY: docs
+docs: bin/docs
+	@echo "Generating docs"
+	@./bin/docs --target=./docs/cmd
+	@./bin/docs --target=./docs/man/man1 --kind=man
+	@rm -f ./bin/docs
+
