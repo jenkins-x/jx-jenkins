@@ -104,3 +104,9 @@ If you see this error when trying to trigger a pipeline:
 ```
 
 Then until we figure out a better workaround you need to go into `Manage Jenkins` -> `Configure Global Security` then make sure you uncheck `Prevent Cross Site Request Forgery exploits` 
+
+
+## Commands
+
+See the [jx-jenkins command reference](docs/cmd/jx-jenkins.md#see-also)
+
