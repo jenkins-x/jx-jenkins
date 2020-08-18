@@ -49,4 +49,6 @@ replace k8s.io/test-infra => github.com/jenkins-x/test-infra v0.0.0-202006111422
 
 replace gomodules.xyz/jsonpatch/v2 => gomodules.xyz/jsonpatch/v2 v2.0.1
 
+replace github.com/hashicorp/go-multierror => github.com/hashicorp/go-multierror v1.0.0
+
 go 1.13
