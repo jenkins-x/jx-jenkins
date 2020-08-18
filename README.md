@@ -11,7 +11,9 @@
 It helps bridge the gap between [Jenkins](https://jenkins.io/) and [Jenkins X](https://jenkins-x.io/) around developer UX and ChatOps.
 
 
-## Using Trigger Pipeline CLI
+## Using jx-jenkins
+
+If you are already using [Jenkins X 3.x](https://jenkins-x.io/docs/v3/) then you will already have the binary as a plugin inside the [jx binary](https://jenkins-x.io/docs/v3/guides/jx3/).
 
 Download the binary and put it on your `$PATH` or use the trigger-pipeline container image in a pipeline step in Jenkins or Jenkins X / Tekton.
 
