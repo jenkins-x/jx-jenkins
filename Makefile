@@ -131,6 +131,10 @@ release: clean build test linux
 clean: ## Clean the generated artifacts
 	rm -rf build release dist
 
+.PHONY: goreleaser
+goreleaser:
+	step-go-releaser --organisation=$(ORG) --revision=$(REV) --branch=$(BRANCH) --build-date=$(BUILD_DATE) --go-version=$(GO_VERSION) --root-package=$(ROOT_PACKAGE) --version=$(VERSION)
+
 get-fmt-deps: ## Install test dependencies
 	$(GO_NOMOD) get golang.org/x/tools/cmd/goimports
 
