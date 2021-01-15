@@ -5,10 +5,10 @@ require (
 	github.com/alecthomas/jsonschema v0.0.0-20200530073317-71f438968921 // indirect
 	github.com/cpuguy83/go-md2man v1.0.10
 	github.com/jenkins-x/golang-jenkins v0.0.0-20180919102630-65b83ad42314
-	github.com/jenkins-x/jx-api v0.0.17 // indirect
+	github.com/jenkins-x/jx-api v0.0.24 // indirect
 	github.com/jenkins-x/jx-logging v0.0.11
-	github.com/jenkins-x/jx/v2 v2.1.128
-	github.com/jenkins-x/lighthouse v0.0.708 // indirect
+	github.com/jenkins-x/jx/v2 v2.1.155
+	github.com/jenkins-x/lighthouse v0.0.907 // indirect
 	github.com/magiconair/properties v1.8.1
 	github.com/mattn/go-colorable v0.1.6 // indirect
 	github.com/pkg/errors v0.9.1
