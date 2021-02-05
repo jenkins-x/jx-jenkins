@@ -4,12 +4,12 @@ require (
 	github.com/MakeNowJust/heredoc v1.0.0 // indirect
 	github.com/alecthomas/jsonschema v0.0.0-20200530073317-71f438968921 // indirect
 	github.com/cpuguy83/go-md2man v1.0.10
-	github.com/jenkins-x/go-scm v1.5.211 // indirect
+	github.com/jenkins-x/go-scm v1.5.216 // indirect
 	github.com/jenkins-x/golang-jenkins v0.0.0-20180919102630-65b83ad42314
 	github.com/jenkins-x/jx-api v0.0.24 // indirect
 	github.com/jenkins-x/jx-logging v0.0.11
 	github.com/jenkins-x/jx/v2 v2.1.155
-	github.com/jenkins-x/lighthouse v0.0.908 // indirect
+	github.com/jenkins-x/lighthouse v0.0.923 // indirect
 	github.com/magiconair/properties v1.8.1
 	github.com/mattn/go-colorable v0.1.6 // indirect
 	github.com/pkg/errors v0.9.1
@@ -17,8 +17,8 @@ require (
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.6.1
 	gopkg.in/AlecAivazis/survey.v1 v1.8.8 // indirect
-	k8s.io/api v0.18.1
-	k8s.io/apimachinery v0.18.1
+	k8s.io/api v0.20.2
+	k8s.io/apimachinery v0.20.2
 	k8s.io/client-go v11.0.1-0.20190805182717-6502b5e7b1b5+incompatible
 )
 
